@@ -1,0 +1,30 @@
+---
+
+## TODO:
+##  - name: handle gitlab authing
+##    include_role: 
+##      name: smabot.gitlab.auth_gitlab
+##    vars:
+##      server_instance: "{{ _server_iter.value }}"
+
+  - name: handle server settings  ==>>  {{ _server_iter.key }}
+    awx.awx.tower_settings:
+      settings: "{{ _server_iter.server_settings }}"
+
+## 
+##   - name: handle users
+##     include_tasks: users/handle_users.yml
+## 
+## ##  - debug:
+## ##      var: _server_iter
+## 
+##   - name: handle roles
+##     include_tasks: handle_roles.yml
+##     when: _server_iter.value.get('roles', False) is truthy
+##     include_tasks: handle_role.yml
+##     loop:
+##       - key: roles
+##         value: "{{ _server_iter.value.get('roles', {}) }}"
+##     loop_control:
+##       loop_var: _cur_role_iter
+

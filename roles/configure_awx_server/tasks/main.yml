@@ -1,0 +1,14 @@
+---
+
+  - smabot.ansible_extra.normalize_awx_cfg:
+    register: _tmp_normres
+
+  - set_fact:
+      awx_cfg_normed: "{{ _tmp_normres.normalized }}"
+
+
+  - include_tasks: handle_server_instance.yml
+    loop: "{{ awx_cfg_normed.instances | dict2items() }}"
+    loop_control:
+      loop_var: _server_iter
+
