@@ -1,0 +1,13 @@
+---
+
+  - name: handle awx authing  ==>>  {{ _server_iter.key }}
+    include_role: 
+      name: smabot.ansible_extra.auth_awx
+    vars:
+      server_instance: "{{ _server_iter.value }}"
+
+  - block:
+      - include_tasks: handle_srvinst.yml
+    delegate_to: localhost
+    environment: "{{ auth_awx_values }}"
+

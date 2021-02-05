@@ -1,0 +1,17 @@
+---
+
+  - set_fact:
+      _tmp_server_secret: >-
+       {{ lookup('smabot.hashivault.hashivault_ex', 
+            server_instance.auth.hvault_path
+       ) }}
+    no_log: "{{ not (disable_secret_log_hiding | default(false, True)) }}"
+
+  - set_fact:
+     auth_awx_values:
+       TOWER_HOST: "{{ auth_awx_url }}"
+       TOWER_USERNAME: "{{ _tmp_server_secret.user }}"
+       TOWER_PASSWORD: "{{ _tmp_server_secret.password }}"
+       TOWER_VERIFY_SSL: "{{ _tmp_server_secret.verify_ssl }}"
+    no_log: "{{ not (disable_secret_log_hiding | default(false, True)) }}"
+

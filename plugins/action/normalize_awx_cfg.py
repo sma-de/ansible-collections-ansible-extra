@@ -122,13 +122,13 @@ class JobCfgNormalizer(NormalizerBase):
 
     def _handle_specifics_presub(self, cfg, my_subcfg, cfgpath_abs):
         # default job pyenv
-        pyenv = my_subcfg.get('virtual_pyenv', None)
-
-        if not pyenv:
-            pyenv_orga = self.get_parentcfg(cfg, cfgpath_abs, level=3)
-
-            if pyenv_orga:
-                my_subcfg['virtual_pyenv'] = pyenv_orga
+##         pyenv = my_subcfg.get('virtual_pyenv', None)
+## 
+##         if not pyenv:
+##             pyenv_orga = self.get_parentcfg(cfg, cfgpath_abs, level=3)
+## 
+##             if pyenv_orga:
+##                 my_subcfg['virtual_pyenv'] = pyenv_orga
 
         return my_subcfg
 

@@ -1,0 +1,23 @@
+---
+
+  - set_fact:
+     ## if set use meta.internal_selfurl, fallback to standard server url
+     auth_awx_url: >-
+       {{ server_instance.get('meta', {}).get(
+           'internal_selfurl', server_instance.url) 
+       }}
+
+
+  - name: get awx authing secret by default hashivault method
+    include_role: 
+      name: smabot.ansible_extra.auth_awx_hashivault
+    when: >-
+      server_instance.get('auth', {}).get('hvault_path', None) is truthy
+
+
+  - name: use custom awx authing method
+    include_role: 
+      name: "{{ server_instance.auth.custom_method }}"
+    when: >-
+      server_instance.get('auth', {}).get('custom_method', None) is truthy
+

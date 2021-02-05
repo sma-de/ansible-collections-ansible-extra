@@ -1,15 +1,8 @@
 ---
 
-## TODO:
-##  - name: handle gitlab authing
-##    include_role: 
-##      name: smabot.gitlab.auth_gitlab
-##    vars:
-##      server_instance: "{{ _server_iter.value }}"
-
   - name: handle server settings  ==>>  {{ _server_iter.key }}
     awx.awx.tower_settings:
-      settings: "{{ _server_iter.server_settings }}"
+      settings: "{{ _server_iter.value.server_settings }}"
 
 ## 
 ##   - name: handle users
